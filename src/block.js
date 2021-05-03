@@ -20,7 +20,7 @@ class Block {
 		this.height = 0;                                            // Block Height (consecutive number of each block)
 		this.body = Buffer(JSON.stringify(data)).toString('hex');   // Will contain the transactions stored in the block, by default it will encode the data
 		this.time = 0;                                              // Timestamp for the Block creation
-		this.previousBlockHash = null;                              // Reference to the previous Block Hash
+		this.previousBlockHash = null;                         // Reference to the previous Block Hash
     }
     
   
@@ -40,8 +40,8 @@ class Block {
         let self = this;
         return new Promise((resolve, reject) => {
             // Save in auxiliary variable the current block hash
-          var chash = SHA256(self.hash);
-          if (chash === self.hash) {
+          var hash = SHA256(JSON.stringify(self)).toString();
+          if (hash === self.hash) {
               resolve(chash);
           } else {
               reject('Hash does not match');

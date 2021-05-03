@@ -24,7 +24,7 @@ class BlockchainController {
         this.app.get("/block/height/:height", async (req, res) => {
             if(req.params.height) {
                 const height = parseInt(req.params.height);
-                let block = await this.blockchain.getBlockByHeight(height);
+                let block = (await this.blockchain.getBlockByHeight(height));
                 if(block){
                     return res.status(200).json(block);
                 } else {
@@ -49,6 +49,7 @@ class BlockchainController {
                     return res.status(500).send("An error happened!");
                 }
             } else {
+                console.log(req.body.address)
                 return res.status(500).send("Check the Body Parameter!");
             }
         });
